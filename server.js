@@ -1,6 +1,6 @@
-const WebSocket = require('ws');
-const dgram = require('dgram');
-const osc = require('osc-min');
+import { WebSocketServer } from 'ws';
+import dgram from 'node:dgram';
+import osc from 'osc-min';
 
 /**
  * TUIO WebSocket to OSC/UDP Bridge Server
@@ -27,7 +27,7 @@ class TuioBridgeServer {
     this.udpClient = dgram.createSocket('udp4');
 
     // 创建 WebSocket 服务器
-    this.wss = new WebSocket.Server({ port: this.wsPort });
+    this.wss = new WebSocketServer({ port: this.wsPort });
 
     this.wss.on('connection', (ws) => {
       console.log(`[WebSocket] 新客户端连接: ${ws._socket.remoteAddress}`);

@@ -79,27 +79,32 @@
             margin-bottom: 48px;
         }
 
-        .header-dots {
-            display: flex;
+        .logo-dots {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            margin-bottom: 16px;
+            gap: 12px;
+            margin-bottom: 8px;
         }
 
-        .header-dot {
+        .logo-dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #22d3ee;
             animation: pulse 2s infinite;
         }
 
-        .header-dot:nth-child(2) {
+        .logo-dot:nth-child(1) {
+            background: #3b82f6;
+        }
+
+        .logo-dot:nth-child(2) {
+            background: #22d3ee;
             animation-delay: 0.2s;
         }
 
-        .header-dot:nth-child(3) {
+        .logo-dot:nth-child(3) {
+            background: #3b82f6;
             animation-delay: 0.4s;
         }
 
@@ -108,18 +113,73 @@
             50% { opacity: 0.5; }
         }
 
-        .header-title {
-            color: #22d3ee;
+        .logo-title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
             margin-bottom: 8px;
-            letter-spacing: 0.1em;
-            font-size: 2rem;
-            font-weight: 600;
         }
 
-        .header-subtitle {
-            font-size: 0.875rem;
-            color: #9ca3af;
+        .logo-image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-glow {
+            position: absolute;
+            inset: -20px;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.3) 0%, rgba(34, 211, 238, 0.3) 50%, rgba(234, 179, 8, 0.3) 100%);
+            border-radius: 50%;
+            filter: blur(24px);
+            opacity: 0.5;
+            animation: pulse-slow 2.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        .logo-image {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 20px rgba(34, 211, 238, 0.5));
+            animation: float 3s ease-in-out infinite, subtle-rotate 5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes subtle-rotate {
+            0%, 100% { transform: rotate(-3deg) scale(1); }
+            50% { transform: rotate(3deg) scale(1.05); }
+        }
+
+        .logo-fallback {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-title {
+            font-size: 2.25rem;
             letter-spacing: 0.05em;
+            background: linear-gradient(to right, #60a5fa, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .logo-subtitle {
+            color: rgba(147, 197, 253, 0.6);
+            letter-spacing: 0.1em;
+            font-size: 0.875rem;
         }
 
         /* 状态栏 */
@@ -371,13 +431,33 @@
     <div class="main-content page-transition">
         <!-- 头部区域 -->
         <div class="header-section">
-            <div class="header-dots">
-                <div class="header-dot"></div>
-                <div class="header-dot"></div>
-                <div class="header-dot"></div>
+            <div class="logo-dots">
+                <div class="logo-dot"></div>
+                <div class="logo-dot"></div>
+                <div class="logo-dot"></div>
             </div>
-            <h1 class="header-title">互动照明系统</h1>
-            <p class="header-subtitle">CONTROL PANEL v3.2.1</p>
+            <div class="logo-title-container">
+                <div class="logo-image-container">
+                    <div class="logo-glow"></div>
+                    <img src="assets/logo.png" alt="BAITR Logo" class="logo-image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="logo-fallback" style="display: none;">
+                        <svg class="logo-image" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="url(#gradient)" stroke-width="3"/>
+                            <circle cx="50" cy="50" r="25" fill="none" stroke="url(#gradient)" stroke-width="2"/>
+                            <circle cx="50" cy="50" r="10" fill="url(#gradient)"/>
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#22d3ee;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#eab308;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+                <h1 class="logo-title">LED SYSTEM</h1>
+            </div>
+            <p class="logo-subtitle">CONTROL PANEL v3.2.1</p>
         </div>
 
         <!-- 状态栏 -->
